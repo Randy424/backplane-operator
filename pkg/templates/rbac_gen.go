@@ -113,7 +113,7 @@ package main
 //+kubebuilder:rbac:groups="",resources=secrets,verbs=create;get;list;watch
 //+kubebuilder:rbac:groups="",resources=secrets,verbs=create;get;list;watch
 //+kubebuilder:rbac:groups="",resources=secrets,verbs=get;list;update;watch;patch
-//+kubebuilder:rbac:groups="",resources=secrets,verbs=get;list;watch;create;update
+//+kubebuilder:rbac:groups="",resources=secrets,verbs=get;list;watch;create;update;delete
 //+kubebuilder:rbac:groups="",resources=secrets,verbs=get;list;watch;update;patch;delete
 //+kubebuilder:rbac:groups="",resources=secrets,verbs=get;watch;list;create
 //+kubebuilder:rbac:groups="",resources=secrets,verbs=list;get;watch
@@ -293,7 +293,8 @@ package main
 //+kubebuilder:rbac:groups=bootstrap.cluster.x-k8s.io,resources=*,verbs=get;list;watch
 //+kubebuilder:rbac:groups=bootstrap.cluster.x-k8s.io,resources=*,verbs=get;list;watch
 //+kubebuilder:rbac:groups=bootstrap.cluster.x-k8s.io,resources=eksconfigs,verbs=get;list;patch;update;watch
-//+kubebuilder:rbac:groups=bootstrap.cluster.x-k8s.io,resources=eksconfigs/status,verbs=get;patch;update
+//+kubebuilder:rbac:groups=bootstrap.cluster.x-k8s.io,resources=eksconfigs/status;nodeadmconfigs/status,verbs=get;patch;update
+//+kubebuilder:rbac:groups=bootstrap.cluster.x-k8s.io,resources=nodeadmconfigs,verbs=create;delete;get;list;patch;update;watch
 //+kubebuilder:rbac:groups=bootstrap.cluster.x-k8s.io,resources=openshiftassistedconfigs,verbs=create;delete;get;list;patch;update;watch
 //+kubebuilder:rbac:groups=bootstrap.cluster.x-k8s.io,resources=openshiftassistedconfigs,verbs=create;delete;get;list;patch;update;watch
 //+kubebuilder:rbac:groups=bootstrap.cluster.x-k8s.io;controlplane.cluster.x-k8s.io;infrastructure.cluster.x-k8s.io,resources=*,verbs=create;delete;get;list;patch;update;watch
@@ -394,6 +395,10 @@ package main
 //+kubebuilder:rbac:groups=config.open-cluster-management.io,resources=klusterletconfigs,verbs=create;get;list;patch;update
 //+kubebuilder:rbac:groups=config.open-cluster-management.io,resources=klusterletconfigs,verbs=get;list;watch
 //+kubebuilder:rbac:groups=config.open-cluster-management.io,resources=klusterletconfigs,verbs=get;list;watch;create;update;delete;patch
+//+kubebuilder:rbac:groups=config.openshift.io,resources=apiservers,verbs=get;list;watch
+//+kubebuilder:rbac:groups=config.openshift.io,resources=apiservers,verbs=get;list;watch
+//+kubebuilder:rbac:groups=config.openshift.io,resources=apiservers,verbs=get;list;watch
+//+kubebuilder:rbac:groups=config.openshift.io,resources=apiservers,verbs=get;list;watch
 //+kubebuilder:rbac:groups=config.openshift.io,resources=apiservers,verbs=get;list;watch
 //+kubebuilder:rbac:groups=config.openshift.io,resources=apiservers,verbs=get;list;watch
 //+kubebuilder:rbac:groups=config.openshift.io,resources=apiservers,verbs=get;list;watch
@@ -571,11 +576,11 @@ package main
 //+kubebuilder:rbac:groups=infrastructure.cluster.x-k8s.io,resources=aroclusters;aromachinepools;azureasomanagedclusters;azureasomanagedcontrolplanes;azureasomanagedmachinepools;azureclusteridentities;azureclusteridentities/status;azureclusters;azuremachinepoolmachines;azuremachinepools;azuremachines;azuremanagedclusters;azuremanagedcontrolplanes;azuremanagedmachinepools,verbs=create;delete;get;list;patch;update;watch
 //+kubebuilder:rbac:groups=infrastructure.cluster.x-k8s.io,resources=awsclustercontrolleridentities,verbs=create;get;list;watch
 //+kubebuilder:rbac:groups=infrastructure.cluster.x-k8s.io,resources=awsclusterroleidentities;awsclusterstaticidentities;awsmachinetemplates,verbs=get;list;watch
-//+kubebuilder:rbac:groups=infrastructure.cluster.x-k8s.io,resources=awsclusters/status;awsfargateprofiles/status;awsmachinetemplates/status;rosaclusters/status;rosanetworks/status;rosaroleconfigs/status,verbs=get;patch;update
+//+kubebuilder:rbac:groups=infrastructure.cluster.x-k8s.io,resources=awsclusters/status;awsfargateprofiles/status;awsmachinetemplates/status;rosaclusters/status;rosanetworks/status;rosaocmroleconfigs/status;rosaroleconfigs/status,verbs=get;patch;update
 //+kubebuilder:rbac:groups=infrastructure.cluster.x-k8s.io,resources=awsclusters;awsfargateprofiles;awsmachinepools;awsmanagedclusters;awsmanagedmachinepools;rosaclusters,verbs=delete;get;list;patch;update;watch
 //+kubebuilder:rbac:groups=infrastructure.cluster.x-k8s.io,resources=awsmachinepools/finalizers,verbs=delete;update
 //+kubebuilder:rbac:groups=infrastructure.cluster.x-k8s.io,resources=awsmachinepools/status;awsmachines/status;awsmanagedclusters/status;awsmanagedmachinepools/status,verbs=get;list;patch;update;watch
-//+kubebuilder:rbac:groups=infrastructure.cluster.x-k8s.io,resources=awsmachines;rosamachinepools;rosanetworks;rosaroleconfigs,verbs=create;delete;get;list;patch;update;watch
+//+kubebuilder:rbac:groups=infrastructure.cluster.x-k8s.io,resources=awsmachines;rosamachinepools;rosanetworks;rosaocmroleconfigs;rosaroleconfigs,verbs=create;delete;get;list;patch;update;watch
 //+kubebuilder:rbac:groups=infrastructure.cluster.x-k8s.io,resources=azuremachinetemplates,verbs=get;list;watch
 //+kubebuilder:rbac:groups=infrastructure.cluster.x-k8s.io,resources=azuremachinetemplates,verbs=get;list;watch
 //+kubebuilder:rbac:groups=infrastructure.cluster.x-k8s.io,resources=azuremachinetemplates/status,verbs=get;list;patch;update;watch
@@ -584,7 +589,7 @@ package main
 //+kubebuilder:rbac:groups=infrastructure.cluster.x-k8s.io,resources=metal3clusters/status;metal3dataclaims/status;metal3datas/status;metal3datatemplates/status;metal3machines/status;metal3remediations/status,verbs=get;patch;update
 //+kubebuilder:rbac:groups=infrastructure.cluster.x-k8s.io,resources=metal3clusters;metal3clustertemplates;metal3dataclaims;metal3datas;metal3datatemplates;metal3machines;metal3machinetemplates;metal3remediations,verbs=create;delete;get;list;patch;update;watch
 //+kubebuilder:rbac:groups=infrastructure.cluster.x-k8s.io,resources=metal3clusters;metal3clustertemplates;metal3dataclaims;metal3datas;metal3datatemplates;metal3machines;metal3machinetemplates;metal3remediations,verbs=create;delete;get;list;patch;update;watch
-//+kubebuilder:rbac:groups=infrastructure.cluster.x-k8s.io,resources=rosamachinepools/finalizers;rosanetworks/finalizers;rosaroleconfigs/finalizers,verbs=update
+//+kubebuilder:rbac:groups=infrastructure.cluster.x-k8s.io,resources=rosamachinepools/finalizers;rosanetworks/finalizers;rosaocmroleconfigs/finalizers;rosaroleconfigs/finalizers,verbs=update
 //+kubebuilder:rbac:groups=infrastructure.cluster.x-k8s.io,resources=rosamachinepools/status,verbs=create;get;list;patch;update;watch
 //+kubebuilder:rbac:groups=insights.azure.com,resources=actiongroups/finalizers;actiongroups/status;autoscalesettings/finalizers;autoscalesettings/status;components/finalizers;components/status;diagnosticsettings/finalizers;diagnosticsettings/status;metricalerts/finalizers;metricalerts/status;scheduledqueryrules/finalizers;scheduledqueryrules/status;webtests/finalizers;webtests/status,verbs=get;patch;update
 //+kubebuilder:rbac:groups=insights.azure.com,resources=actiongroups/finalizers;actiongroups/status;autoscalesettings/finalizers;autoscalesettings/status;components/finalizers;components/status;diagnosticsettings/finalizers;diagnosticsettings/status;metricalerts/finalizers;metricalerts/status;scheduledqueryrules/finalizers;scheduledqueryrules/status;webtests/finalizers;webtests/status,verbs=get;patch;update
